@@ -1,0 +1,16 @@
+{
+  "name": "multer-cos",
+  "version": "1.0.0",
+  "description": "multer for qcloud COS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express",
+    "multer",
+    "COS"
+  ],
+  "author": "lanbosm",
+  "license": "ISC"
+}
