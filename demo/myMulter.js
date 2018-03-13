@@ -1,6 +1,6 @@
 let path=require('path');
 let multer = require('multer');
-let multerCOS = require('multer-COS');
+let multerCOS = require('multer-cos');
 require( 'dotenv' ).config();
 /**
  * multer

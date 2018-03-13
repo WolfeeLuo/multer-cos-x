@@ -169,14 +169,18 @@ COSStorage.prototype._handleFile = function _handleFile (req, file, cb) {
                     ContentLength:tmp.bytesWritten,
                 }, function (err, data) {
                     if(err){
-                        that._removeFile(req,file,cb(err.error));
+                        that._removeFile(req,file,function(){
+                            cb(err.error);
+                        });
                     }
                     else {
                         if (that.cosRun.domain) {
                             data.Location = `http://${that.cosRun.domain}/${file.filename}`;
                         }
                         file.url=data.Location;
-                        that._removeFile(req,file,cb);
+                        that._removeFile(req,file,function(){
+                            cb();
+                        });
                     }
                 });
             });
@@ -200,6 +204,7 @@ COSStorage.prototype._removeFile = function _removeFile (req, file, cb) {
     delete file.tmpPath;
 
     fs.unlink(path,cb);
+
 
 };
 
