@@ -48,8 +48,8 @@ function COSStorage (opts={}) {
         opts.cos.Bucket=opts.cos.Bucket || process.env.Bucket || null;
         opts.cos.Region=opts.cos.Region || process.env.Region || null;
         opts.cos.domain = opts.cos.domain || process.env.domain || null;
-        opts.cos.dir= opts.cos.dir+'/' || process.env.dir+'/' || '/';
-
+        opts.cos.dir= opts.cos.dir || process.env.dir || '';
+        opts.cos.dir=opts.cos.dir==''?opts.cos.dir:opts.cos.dir+'/';
         //验证cos服务
         if ( ! opts.cos.SecretId ) {
             throw new Error( 'You have to specify  qcloud api SecretId !' );
