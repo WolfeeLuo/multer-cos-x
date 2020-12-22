@@ -1,16 +1,16 @@
 {
-  "_from": "multer-cos",
-  "_id": "multer-cos@1.0.3",
+  "_from": "multer-cos-x",
+  "_id": "multer-cos-x@1.0.3",
   "_inBundle": false,
   "_integrity": "sha512-KD1/ZUHcmjYtsPHlosOsned8u6a1xYgUYmnU0659rRue4fjVSbEBo6BKyI2N6BbUNHAWMz18NUb9a5Gn5GcgvQ==",
-  "_location": "/multer-cos",
+  "_location": "/multer-cos-x",
   "_phantomChildren": {},
   "_requested": {
     "type": "tag",
     "registry": true,
-    "raw": "multer-cos",
-    "name": "multer-cos",
-    "escapedName": "multer-cos",
+    "raw": "multer-cos-x",
+    "name": "multer-cos-x",
+    "escapedName": "multer-cos-x",
     "rawSpec": "",
     "saveSpec": null,
     "fetchSpec": "latest"
@@ -19,15 +19,15 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/multer-cos/-/multer-cos-1.0.3.tgz",
+  "_resolved": "https://registry.npmjs.org/multer-cos-x/-/multer-cos-x-1.0.3.tgz",
   "_shasum": "f8998b9a16d2e6e2d3f00cd811ef0bcf14e804b6",
-  "_spec": "multer-cos",
+  "_spec": "multer-cos-x",
   "_where": "/Users/lanbo/workplace/websocket",
   "author": {
     "name": "lanbosm"
   },
   "bugs": {
-    "url": "https://github.com/lanbosm/multer-COS/issues"
+    "url": "https://github.com/WolfeeLuo/multer-cos-x/issues"
   },
   "bundleDependencies": false,
   "deprecated": false,
@@ -40,7 +40,7 @@
   "engines": {
     "node": ">= 6.10.0"
   },
-  "homepage": "https://github.com/lanbosm/multer-COS#readme",
+  "homepage": "https://github.com/WolfeeLuo/multer-cos-x#readme",
   "keywords": [
     "express",
     "multer",
@@ -48,10 +48,10 @@
   ],
   "license": "MIT",
   "main": "index.js",
-  "name": "multer-cos",
+  "name": "multer-cos-x",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/lanbosm/multer-COS.git"
+    "url": "git+ssh://git@github.com:WolfeeLuo/multer-cos-x.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
