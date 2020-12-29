@@ -126,77 +126,57 @@ COSStorage.prototype.restartTask = function (TaskId) {
 
 COSStorage.prototype._handleFile = function _handleFile(req, file, cb) {
   let that = this;
-
-  that.getDestination(req, file, function (err, destination) {
+  that.getFilename(req, file, function (err, filename) {
     if (err) {
       return cb(err);
     }
-    file.destination = destination;
-
-    that.getFilename(req, file, function (err, filename) {
-      if (err) {
-        return cb(err);
-      }
-      file.filename = that.cosRun.dir + filename;
-
-      file.tmpPath = path.join(destination, filename);
-
-      //制造1个temp文件
-      let tmp = fs.createWriteStream(file.tmpPath);
-
-      file.stream.pipe(tmp);
-
-      tmp.on("finish", function () {
-        //注意：，Key（文件名）不能以 / 结尾，否则会被识别为文件夹 。
-        that.cos.putObject(
-          {
-            Bucket: that.cosRun.Bucket /* 必须 */, // Bucket 格式：test-1250000000
-            Region: that.cosRun.Region,
-            Key: file.filename /* 必须 */,
-            TaskReady: function (tid) {
-              that.cosRun.taskId = tid;
-            },
-            onProgress: function (progressData) {
-              that.cosRun.onProgress(progressData);
-            },
-            // ContentType:'text/plain',cos 已经帮我们定义好了
-            Body: fs.createReadStream(file.tmpPath),
-            ContentLength: tmp.bytesWritten,
-          },
-          function (err, data) {
-            if (err) {
-              that._removeFile(req, file, function () {
-                cb(err.error);
-              });
-            } else {
-              const protocol = that.cosRun.domainProtocol || "http";
-              if (that.cosRun.domain) {
-                data.Location = `${protocol}://${that.cosRun.domain}/${file.filename}`;
-              }
-              file.url = data.Location;
-              that._removeFile(req, file, function () {
-                cb();
-              });
-            }
+    file.filename = that.cosRun.dir + filename;
+    const stream = file.stream;
+    const buffer = stream.read();
+    that.cos.putObject(
+      {
+        Bucket: that.cosRun.Bucket /* 必须 */, // Bucket 格式：test-1250000000
+        Region: that.cosRun.Region,
+        Key: file.filename /* 必须 */,
+        onTaskReady: function (tid) {
+          that.cosRun.taskId = tid;
+        },
+        onProgress: function (progressData) {
+          that.cosRun.onProgress(progressData);
+        },
+        // ContentType:'text/plain',cos 已经帮我们定义好了
+        Body: buffer,
+        // ContentLength: tmp.bytesWritten,
+      },
+      function (err, data) {
+        if (err) {
+          that._removeFile(req, file, function () {
+            cb(err.error);
+          });
+        } else {
+          const protocol = that.cosRun.domainProtocol || "http";
+          if (that.cosRun.domain) {
+            data.Location = `${protocol}://${that.cosRun.domain}/${file.filename}`;
           }
-        );
-      });
-
-      tmp.on("error", function (err) {
-        that._removeFile(req, file, cb(err.error));
-      });
-    });
+          file.url = data.Location;
+          cb();
+          /* that._removeFile(req, file, function () {
+            cb();
+          }); */
+        }
+      }
+    );
   });
 };
 
 COSStorage.prototype._removeFile = function _removeFile(req, file, cb) {
-  let path = file.tmpPath;
+  // let path = file.tmpPath;
   this.cosRun.taskId = null;
   delete file.destination;
   delete file.filename;
-  delete file.tmpPath;
+  // delete file.tmpPath;
 
-  fs.unlink(path, cb);
+  // fs.unlink(path, cb);
 };
 
 module.exports = function (opts) {
