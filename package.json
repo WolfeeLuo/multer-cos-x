@@ -1,6 +1,6 @@
 {
   "_from": "multer-cos-x",
-  "_id": "multer-cos-x@1.0.6",
+  "_id": "multer-cos-x@1.0.7",
   "_inBundle": false,
   "_integrity": "sha512-KD1/ZUHcmjYtsPHlosOsned8u6a1xYgUYmnU0659rRue4fjVSbEBo6BKyI2N6BbUNHAWMz18NUb9a5Gn5GcgvQ==",
   "_location": "/multer-cos-x",
@@ -19,7 +19,7 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/multer-cos-x/-/multer-cos-x-1.0.6.tgz",
+  "_resolved": "https://registry.npmjs.org/multer-cos-x/-/multer-cos-x-1.0.7.tgz",
   "_shasum": "f8998b9a16d2e6e2d3f00cd811ef0bcf14e804b6",
   "_spec": "multer-cos-x",
   "_where": "/Users/lanbo/workplace/websocket",
@@ -54,7 +54,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.0.6",
+  "version": "1.0.7",
   "dependencies": {
     "cos-nodejs-sdk-v5": "^2.8.4",
     "dotenv": "^8.2.0"

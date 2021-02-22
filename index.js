@@ -72,7 +72,7 @@ COSStorage.prototype._handleFile = function _handleFile(req, file, cb) {
         const stream = file.stream;
         // put object after 'end' event emit to ensure multer 'readFinished'
         stream.on("end", () => {
-            const buffer = chunks.join('');
+            const buffer = Buffer.concat(chunks)
             that.cos.putObject(
                 {
                     Bucket: that.cosRun.Bucket,
